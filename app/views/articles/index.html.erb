@@ -1,6 +1,5 @@
-<h1>Listing Articles</h1>
-<%= link_to "New Article", new_article_path %>
-<br>
+<h1>Articles</h1>
+
 Our blog has <%= Article.public_count %> articles and counting!
 
 <ul>
@@ -11,5 +10,10 @@ Our blog has <%= Article.public_count %> articles and counting!
       </li>
     <% end %>
   <% end %>
+
+  <%= link_to "New Article", new_article_path  %>
 </ul>
 
+
+<%= button_to "logout", destroy_user_session_path, method: :delete if current_user  %>
+<%= link_to "login", new_user_session_path, method: :delete if !current_user  %>

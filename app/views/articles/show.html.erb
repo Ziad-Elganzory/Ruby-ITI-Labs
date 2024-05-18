@@ -1,22 +1,26 @@
-<p><strong>Title:</strong>
-<%= @article.title %>
-</p>
+<h1><%= @article.title %></h1>
+<p><%= @article.body%></p><br />
+<p>Report Count: <%= @article.report_count%></p><br />
+<p>Status: <%= @article.status%></p><br />
+<% if @article.image.attached? %>
+  <%= image_tag @article.image %>
+<% end %>
 
-<p><strong>Title:</strong>
-<%= @article.body %>
-</p>
+<ul>
+  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+  <li><%= link_to "Delete", @article, data: {
+    turbo_method: "delete",
+    turbo_confirm: "Are You Sure?"
+  } %></li>
+  <%= link_to 'Report', increase_report_count_article_path(@article), data: {
+    turbo_method: "post"
+  }%>
 
+
+</ul>
 
 <h2>Comments</h2>
 <%= render @article.comments %>
 
 <h2>Add a comment:</h2>
 <%= render "comments/form" %>
-
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
